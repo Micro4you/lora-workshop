@@ -1,0 +1,101 @@
+[
+    {
+        "id": "a4ace83c.c62548",
+        "type": "tab",
+        "label": "Flow 1"
+    },
+    {
+        "id": "f35638ee.23f0d8",
+        "type": "mqtt in",
+        "z": "a4ace83c.c62548",
+        "name": "The Things Network",
+        "topic": "+/devices/+/up",
+        "qos": "2",
+        "broker": "4a2744b0.3bee1c",
+        "x": 190.5,
+        "y": 347,
+        "wires": [
+            [
+                "cde38b46.54eb08"
+            ]
+        ]
+    },
+    {
+        "id": "cde38b46.54eb08",
+        "type": "function",
+        "z": "a4ace83c.c62548",
+        "name": "translation",
+        "func": "input = JSON.parse(msg.payload);\n\n// Extract the data of interest from the incomming message.\nmsg.raw_payload = new Buffer(input.payload_raw, 'base64').toString('hex');\nmsg.counter = input.counter;\nmsg.freq = input.metadata.frequency;\nmsg.rssi = input.metadata.gateways[0].rssi;\nmsg.snr = input.metadata.gateways[0].snr;\n\nproximity = parseInt(msg.raw_payload.substring(0,2), 16);\nreed_switch = (msg.raw_payload.substring(3,4) == '1');\n\n// Form the MQTT message\nmsg.payload =\n[{meaning:'raw', value:msg.raw_payload},\n{meaning:'proximity', value: proximity},\n{meaning:'switch', value: reed_switch},\n{meaning:'counter', value:msg.counter},\n{meaning:'freq', value:msg.freq},\n{meaning:'rssi', value:msg.rssi},\n{meaning:'snr', value:msg.snr}];\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 412.5,
+        "y": 347,
+        "wires": [
+            [
+                "8f74233b.d19db",
+                "6b0f29be.319af8"
+            ]
+        ]
+    },
+    {
+        "id": "8f74233b.d19db",
+        "type": "debug",
+        "z": "a4ace83c.c62548",
+        "name": "JSON message",
+        "active": true,
+        "console": "false",
+        "complete": "payload",
+        "x": 651.5,
+        "y": 444,
+        "wires": []
+    },
+    {
+        "id": "6b0f29be.319af8",
+        "type": "mqtt out",
+        "z": "a4ace83c.c62548",
+        "name": "relayr Cloud",
+        "topic": "/v1/<device_id>/data",
+        "qos": "",
+        "retain": "",
+        "broker": "5a063513.aa682c",
+        "x": 639.5,
+        "y": 347,
+        "wires": []
+    },
+    {
+        "id": "4a2744b0.3bee1c",
+        "type": "mqtt-broker",
+        "z": "",
+        "broker": "eu.thethings.network",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": ""
+    },
+    {
+        "id": "5a063513.aa682c",
+        "type": "mqtt-broker",
+        "z": "",
+        "broker": "mqtt.relayr.io",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": ""
+    }
+]
