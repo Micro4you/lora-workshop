@@ -44,7 +44,11 @@ Now we are ready to interact with the RN2483 module through its [command / respo
 
 ## Configuring the RN2483 Module
 
-On this part we will be setting the necessary LoRaWAN keys and saving them to the module's EEPROM. With these keys our device can be activated (and thus, recognized by the gateway). Since there are two ways of performing this activation, both methods are covered below.
+On this part we will be setting the necessary LoRaWAN keys and saving them to the module's EEPROM. With these keys our device can be activated (and thus, recognized by the gateway). Since there are two ways of performing this activation, both methods are covered below, each with a different set of commands.
+
+**These commands must be sent one by one** using the Serial Monitor of the Arduino IDE. To send a command, first introduce it, and press Enter or click `Send`. An example with the first command of the *Activation By Personalization* is shown below.
+
+![](./assets/arduino_ide_serial_monitor_commands.png)
 
 ### Activation By Personalization (ABP)
 
