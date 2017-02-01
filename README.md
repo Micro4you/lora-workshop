@@ -20,20 +20,25 @@ This git repository contains the following three code snippets:
 
 1. On the Arduino IDE, click on `File` → `Open`, and look for the Arduino sketch `usb-to-serial.ino` that can be found in the folder with the same name.
 
-2. Now click on `Tools` → `Board`, and select `Teensy LC`, as shown below.  
-![](./assets/arduino_ide_mac_board_selection.png)
+2. Now click on `Tools` → `Board`, and select `Teensy LC`, as shown below.
 
-3. Your Teensy LC board should be connected to your computer via USB. Select the right port clicking on `Tools` → `Port`. An example of this step in OSX is depicted for clarity.  
-![](./assets/arduino_ide_mac_port_selection.png)
+  ![](./assets/arduino_ide_mac_board_selection.png)
 
-4. Open the Serial Monitor in the Arduino IDE. Simply click on the small icon of a magnifying glass in the top right corner.  
-![](./assets/arduino_ide_serial_monitor_button.png)
+3. Your Teensy LC board should be connected to your computer via USB. Select the right port clicking on `Tools` → `Port`. An example of this step in OSX is depicted for clarity.
 
-5. The Serial Monitor window will open, displaying a message from the RN2483 module. The Teensy LC is now acting as an interface between our computer and such module.   
-![](./assets/arduino_ide_serial_monitor_window.png)
+  ![](./assets/arduino_ide_mac_port_selection.png)
 
-6. Instead of `No line ending`, select `Both NL & CR` as the new line character.  
-![](./assets/arduino_ide_serial_monitor_NL_CR.png)
+4. Open the Serial Monitor in the Arduino IDE. Simply click on the small icon of a magnifying glass in the top right corner.
+
+  ![](./assets/arduino_ide_serial_monitor_button.png)
+
+5. The Serial Monitor window will open, displaying a message from the RN2483 module. The Teensy LC is now acting as an interface between our computer and such module.
+
+  ![](./assets/arduino_ide_serial_monitor_window.png)
+
+6. Instead of `No line ending`, select `Both NL & CR` as the new line character.
+
+  ![](./assets/arduino_ide_serial_monitor_NL_CR.png)
 
 Now we are ready to interact with the RN2483 module through its [command / response interface](http://ww1.microchip.com/downloads/en/DeviceDoc/40001784B.pdf), so we proceed to the next part where it will be configured.
 
