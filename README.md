@@ -40,9 +40,9 @@ The RN2483 must be connected to the Teensy-LC board as follows. For your conveni
 ```
     RN2483   |   TEENSY-LC
        Gnd ----- G
-       3V3 ----- 3V
+       3V3 ----- 2
         Rx ----- 1
-        Tx ----- 2
+        Tx ----- 0
 ``` 
 
 ### Setting Up the Software
