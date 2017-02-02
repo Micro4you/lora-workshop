@@ -165,6 +165,32 @@ We're ready to send them to the module via the Serial Monitor of the Arduino IDE
 
 **Tip:** For security reasons, on this menu the `Application Key` (or App Key) is masked by default. To see it, simply click on the small icon with an eye. To copy it, click on the small icon with a notepad.
 
+### Testing the Network
+
+If you wish to send some data to the network server you must first execute a command for joining the network:
+
+```
+mac join <mode>
+<mode>: abp (activation by personalization),
+        otaa (over the air activation)
+
+e.g. mac join abp
+```
+
+After your request was accepted you can send a payload over LoRaWAN:
+
+```
+mac tx <type> <portno> <data>
+<type>: cnf (confirmable)
+        uncnf (unconfirmable)
+<portno>: number between 1 and 223
+<data>: hex payload
+
+e.g. mac tx uncnf 4 3A1B
+```
+
+You should see the data appear in your `Application Data` on The Things Network.
+
 ## Adding Sensors to the Prototype
 
 Before joining the network and start sending data over LoRaWAN, we will add the following sensors to the protoype: A simple magnetic switch and a distance measuring sensor.
@@ -202,33 +228,21 @@ On the Arduino IDE, click on `File` → `Open`, and look for the Arduino sketch 
 
 This sketch joins the LoRaWAN network using the provided keys and sends data from the two sensors that we've just added.
 
-Here's how the command to join the network looks like:
-
-```
-mac join <mode>
-<mode>: abp (activation by personalization),
-        otaa (over the air activation)
-
-e.g. mac join abp
-```
-
-And here's the syntax to send data over LoRaWAN:
-
-```
-mac tx <type> <portno> <data>
-<type>: cnf (confirmable)
-        uncnf (unconfirmable)
-<portno>: number between 1 and 223
-<data>: hex payload
-
-e.g. mac tx uncnf 4 3A1B
-```
-
-You should see the data appear in your `Application Data` on The Things Network.
-
 ## The Things Network to the relayr Platform
 
-Now you can use `node-red` to subscribe to data recived by the things network and forward it to your account on relayr to store and visulize the data.
+Now you can use `node-red` to subscribe to data recived by the things network and forward it to your account on relayr to store, visulize the data and expose it through our [REST API](https://docs.relayr.io/api/).
+
+Create a new device on *relayr Dashboard* by using the `LoRa Workshop` device model. Follow the [official relayr documentation](https://docs.relayr.io/cloud/getting-started/adding-your-first-device/) if you need help with that.
+
+After that install `node.js` and `node-red` by following the offical Node-RED [getting started guide](https://nodered.org/docs/getting-started/). Once installed copy the `ttn_to_relay_v1.json` content to your clipboard and use it Node-RED by pasting it in `Import` → `Clipboard` and then clicking on `Import` button.
+
+![](./assets/node-red_import_flow.png)
+
+The next thing you need to do is add your credentials to `The Things Network` MQTT node. Double click on it, press the edit icon of the `Server` settings. Under the `Security` tab add your `Application ID` from the *The Things Network* account overview as your `Username` and `default key` as your `Password`.
+
+The other Node-RED node you need to set up is the MQTT output named `relayr Cloud`. You will need to modify the `Topic` (<device id>) and add the `Username` and `Password` in *Security* tab just as in `The Things Network` node. You can find these in `Device Settings` of your newly created device on the relayr Dashboard.
+
+After setting up everything you can click `Deploy` in node red and see the data appear on the *relayr Dashboard*.
 
 ## References
 
@@ -257,7 +271,7 @@ Now you can use `node-red` to subscribe to data recived by the things network an
 
 ## License
 
-Copyright (C) 2017 relayr GmbH, Klemen Lilija <klemen@relayr.io>
+Copyright (C) 2017 relayr GmbH, Klemen Lilija <klemen@relayr.io>, Jaime González-Arintero Berciano <jaime@relayr.io>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
