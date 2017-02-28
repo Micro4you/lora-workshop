@@ -1,5 +1,9 @@
 # LoRa Workshop
 
+## Introduction
+
+**LoRa**™ is a radio technology developed for long range, low power and high-density Internet of Things (IoT) deployments typically laid in a star-of-stars topology. In this workshop we are going to build a LoRaWAN sensor node using the Microchip RN2483 LoRa modem, the Teensy LC as a host MCU and [The Things Network](https://www.thethingsnetwork.org/) public LoRaWAN network. Furthermore, we will use Node-RED to pass on the sensor data from The Things Network to the [relayr Dashboard](https://dev.relayr.io/) where the data will be stored, visualized and exposed through our [REST API](https://docs.relayr.io/api/). 
+
 ## Requirements
 
 The following hardware is required:
@@ -23,8 +27,8 @@ Besides, the following software packages and services are required:
 
 This git repository contains the following three code snippets, placed in folders with the corresponding names:
 
-* `usb-to-serial.ino`: Arduino sketch which enables you to configure the RN2483 LoRa module by using the serial terminal on your computer.
-* `sensor-node.ino`: Arduino code to take sensor readings and to send them every 30 seconds over the pre-configured RN2483 LoRa module to our account on *The Things Network*.
+* `usb-to-serial.ino`: Arduino sketch which enables you to interact with the RN2483 LoRa module by using the serial terminal on your computer.
+* `sensor-node.ino`: Arduino sketch which repetedly reads the sensor values and sends them over the pre-configured RN2483 LoRa module to your account on *The Things Network*.
 * `node-red` snippet (named `ttn_to_relayr_v1.json`): A Node-RED flow that subscribes to *The Things Network* MQTT stream and forwards it to the *relayr Developer Dashboard*.
 
 ## Installation & Configuration
