@@ -268,11 +268,6 @@ After setting up everything you can click `Deploy` in node red and see the data 
 
 [Developer Dashboard](https://developer.relayr.io/)
 
-## To Do
-
-* Add descriptions on ABP and OTAA
-* Add intro on LoRa
-
 ## License
 
 Copyright (C) 2017 relayr GmbH, Klemen Lilija <klemen@relayr.io>, Jaime González-Arintero Berciano <jaime@relayr.io>
