@@ -270,8 +270,6 @@ After setting up everything you can click `Deploy` in node red and see the data 
 
 ## To Do
 
-* Add code ports for the Marvin board (`marvin-usb-to-serial.ino` and `marvin-sensor-node.ino`).
-
 * Modify the tutorial flow to include the Marvin documentation.
 
 ## License
